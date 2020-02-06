@@ -1,0 +1,31 @@
+\section{Analysis}
+Hey \cite{inproceedings}
+
+\begin{minted}[
+    framesep = 2mm,
+    baselinestretch = 1,
+    bgcolor = backcolour,
+    fontsize = \footnotesize,
+    linenos
+]
+{java}
+PVector avoidObstacles()
+{
+    PVector steering = new PVector(0, 0);
+    int obstacleCount = 0;
+
+    for (Obstacle obstacle : obstacles)
+    {
+        float distance = PVector.dist(this.position, obstacle.position);
+        if (distance < obstacleRadius)
+        {
+            PVector seperate = PVector.sub(this.position, obstacle.position);
+            seperate.setMag(10);
+            seperate.div(distance);
+            steering.add(seperate);
+            obstacleCount++;
+        }
+    }
+    return steering;
+}
+\end{minted}
